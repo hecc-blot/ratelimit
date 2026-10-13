@@ -42,7 +42,7 @@ type redisRateLimitSvc struct {
 // 不重复建连。Redis 异常时 fail-open（放行），保证限流组件不拖垮业务。
 func NewRedisLimiter(client redis.UniversalClient, cfg ratelimitConfig.Config) ratelimit.RateLimiter {
 	if client == nil {
-		panic("ratelimit: redis 客户端不能为空")
+		panic("ratelimit: redis client must not be nil")
 	}
 	cfg = ratelimitConfig.Normalize(cfg)
 	return &redisRateLimitSvc{
